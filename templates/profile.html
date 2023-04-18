@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>Имя: {{ current_user.name }}</p>
+<p>Электронная почта: {{ current_user.email }}</p>
+<p>Количество очков: {{ current_user.money}}</p>
+<p>Дата регистрации: {{ current_user.register_data}}</p>
+
+{% endblock %}

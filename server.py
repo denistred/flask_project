@@ -1,0 +1,64 @@
+import flask
+from forms import RegisterForm, LoginForm
+from flask import Flask, render_template, redirect, url_for
+from flask_login import login_user, LoginManager, current_user
+from data import db_session
+from data.users import User
+from werkzeug.security import generate_password_hash, check_password_hash
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'succes'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html', title='test')
+
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        hash = generate_password_hash(form.password.data)
+        user = User()
+        user.name = form.name.data
+        user.email = form.email.data
+        user.hashed_password = hash
+        db_sess = db_session.create_session()
+        db_sess.add(user)
+        db_sess.commit()
+        return redirect(url_for('index'))
+    return render_template('register.html', title='Регистрация', form=form)
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if user and check_password_hash(user.hashed_password, form.password.data):
+            login_user(user)
+            return redirect('/')
+        return render_template('login.html', message='Неправильный логин или пароль', form=form)
+    return render_template('login.html', title='Авторизация', form=form)
+
+
+@app.route('/profile', methods=['POST', 'GET'])
+def profile():
+    db_sess = db_session.create_session()
+
+
+if __name__ == '__main__':
+    db_session.global_init("users.db")
+    app.run()
