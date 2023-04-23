@@ -1,7 +1,7 @@
 import flask
 from forms import RegisterForm, LoginForm
 from flask import Flask, render_template, redirect, url_for
-from flask_login import login_user, LoginManager, current_user
+from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from data import db_session
 from data.users import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
-login_manager.login_message_category = 'succes'
+login_manager.login_message_category = 'success'
 
 
 @login_manager.user_loader
@@ -55,8 +55,26 @@ def login():
 
 
 @app.route('/profile', methods=['POST', 'GET'])
+@login_required
 def profile():
     db_sess = db_session.create_session()
+    return render_template('profile.html', title='Профиль')
+
+
+@app.route('/game')
+def game():
+    return render_template('game.html', title='Блек-Джек')
+
+
+@app.route('/rules')
+def rules():
+    return render_template('rules.html', title='Правила')
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 if __name__ == '__main__':

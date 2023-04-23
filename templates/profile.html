@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>Имя: {{ current_user.name }}</p>
-<p>Электронная почта: {{ current_user.email }}</p>
-<p>Количество очков: {{ current_user.money}}</p>
-<p>Дата регистрации: {{ current_user.register_data}}</p>
-
+<div id="profileContainer">
+   <p>Имя: {{ current_user.name }}</p>
+   <p>Электронная почта: {{ current_user.email }}</p>
+   <p>Количество очков: {{ current_user.money }}</p>
+   <p>Дата регистрации: {{ current_user.created_date }}</p>
+   <form action="/logout" target="_blank">
+      <button>Выйти из аккаунта</button>
+   </form>
+</div>
 {% endblock %}
