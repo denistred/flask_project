@@ -12,6 +12,6 @@ class User(SqlAlchemyBase, UserMixin):
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=False)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     avatar = sqlalchemy.Column(sqlalchemy.BLOB, nullable=True)
-    created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now().date())
     bonus_picked = sqlalchemy.Column(sqlalchemy.Boolean, default=False)
     money = sqlalchemy.Column(sqlalchemy.Integer, default=3000, nullable=False)

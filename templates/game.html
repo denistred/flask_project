@@ -10,5 +10,13 @@
     <div class="playerCardsContainer" id="playerCardsContainer"></div>
     <div class="buttonContainer" id="buttonContainer"></div>
 </div>
-<button id="playbutton" onclick="startGame()">Начать игру</button>
+<div id="win-notification" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); width:300px; height:150px; background-color:#fff; border:1px solid #444; text-align:center; padding:20px;">
+    <h3 id="gameResult"></h3>
+    <p id="dealerPoints"></p>
+    <p id="playerPoints"></p>
+    <button id="playbutton" onclick="startGame()">Начать заново</button>
+</div>
+
+</div>
+<button id="startbutton" onclick="startGame()">Начать игру</button>
 {% endblock %}
