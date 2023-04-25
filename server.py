@@ -1,6 +1,6 @@
 import flask
 from forms import RegisterForm, LoginForm
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from data import db_session
 from data.users import User
@@ -75,6 +75,27 @@ def rules():
 def logout():
     logout_user()
     return redirect('/')
+
+
+@app.route('/change_money_count', methods=['POST'])
+def db_change():
+    db_sess = db_session.create_session()
+    json_responce = request.get_json()
+    money_count = json_responce['money']
+    add_money = json_responce['code']
+    curr_user = db_sess.query(User).filter(User.id == current_user.id).first()
+    if add_money == 0:
+        curr_user.money -= int(money_count)
+    else:
+        curr_user.money += int(money_count)
+    db_sess.commit()
+    return "Success", 200
+
+@app.route('/get_money_count', methods=['GET'])
+def get_money_count():
+    db_sess = db_session.create_session()
+    json_responce = {'money': db_sess.query(User).filter(User.id == current_user.id).first().money}
+    return jsonify(json_responce)
 
 
 if __name__ == '__main__':

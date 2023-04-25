@@ -1,6 +1,5 @@
 function pick_random_card() {
     let random_number = Math.random()
-    //console.log(random_number * cards.length)
     let number = Math.round(random_number * (cards.length - 1));
     return number;
 }
@@ -8,8 +7,9 @@ function pick_random_card() {
 function create_image(card_number) {
     let img = document.createElement("img");
     img.src = "static/images/" + card_number + '.png';
-    img.style.height = "363px";
-    img.style.width = "250px";
+    img.style.height = "290px";
+    img.style.width = "200px";
+    img.style.margin = "10px 0px 10px";
     return img;
 }
 
@@ -32,7 +32,6 @@ for (let i=0; i<cards.length; i++){
         pointsMap[cards[i]] = [11, 1]
     }
 }
-console.log(pointsMap);
 
 
 function countDealerPoints(){
@@ -71,6 +70,8 @@ function countPlayerPoints(){
 
 
 function startGame(){
+    postMoneyChange(50, 1);
+    
     clearGame();
     btn = document.getElementById("startbutton");
     btn.style.display = 'none';
@@ -96,20 +97,15 @@ function startGame(){
 
 function get_card(){
     let pickedCard = pick_random_card();
-    //const para = document.createElement("div");
-    //const node = document.createTextNode(cards[pickedCard]);
 
-    //para.appendChild(node);
     const playerCardsContainer = document.getElementById("playerCardsContainer");
     let para = create_image(cards[pickedCard]);
     playerCardsContainer.appendChild(para);
-    //console.log(pickedCard);
     playerCards.push(cards[pickedCard])
     cards.splice(pickedCard, 1);
     if (dealerCards.length > 0){
         gameLogic();
     }
-    //console.log(cards);
 }
 
 function gameLogic(){
@@ -117,9 +113,6 @@ function gameLogic(){
     console.log("player points:" + playerPoints);
     let dealerPoints = countDealerPoints();
     console.log("dealer points:" + dealerPoints);
-    //if (dealerPoints < 17){ //провека, берет ли дилер карту
-    //    getDealerCard();
-    //}
     if (playerPoints > 21){
         endGame(2);
     }
@@ -133,13 +126,10 @@ function gameLogic(){
 function getDealerCard(){
     let pickedCard = pick_random_card();
     const dealerCardsContainer = document.getElementById("dealerCardsContainer");
-    //para.appendChild(node);
     const para = create_image(cards[pickedCard]);
     dealerCardsContainer.appendChild(para);
-    //console.log(pickedCard);
     dealerCards.push(cards[pickedCard])
     cards.splice(pickedCard, 1);
-    //console.log(cards);
 
 }
 
@@ -170,9 +160,8 @@ function passGame(){
 
 
 function endGame(code){ // 1 - win; 2 - lose; 3 - draw
-    let gameState = document.getElementById('gameState');
     removeButtons();
-
+    updateMoneyCount();
     let dealerPoints = countDealerPoints();
     let dealerPointsContainer = document.getElementById('dealerPoints');
     dealerPointsContainer.innerText = 'Количество очков дилера: ' + dealerPoints;
@@ -182,24 +171,17 @@ function endGame(code){ // 1 - win; 2 - lose; 3 - draw
     playerPointsContainer.innerText = 'Количество ваших очков: ' + playerPoints;
 
     if (code == 1) {
-        //gameState.innerText = 'win';
         document.getElementById("win-notification").style.display = "block";
         document.getElementById("gameResult").innerText = 'Вы победили!';
     }
     else if (code == 2){
-        //gameState.innerText = 'lose';
         document.getElementById("win-notification").style.display = "block";
         document.getElementById('gameResult').innerText = 'Вы проиграли :(';
     }
     else if (code == 3){
-        //gameState.innerText = 'draw';
         document.getElementById("win-notification").style.display = "block";
         document.getElementById('gameResult').innerText = 'Ничья';
     }
-
-    
-
-    
     
 }
 
@@ -217,10 +199,32 @@ function clearGame(){
     dealerCards = [];
     playerCards = [];
     document.getElementById("win-notification").style.display = "none";
-    //document.getElementById("lose-notification").style.display = "none";
-    //document.getElementById("lose-notification").style.display = "none";
 
     for (var i= document.images.length; i-->0;)
         document.images[i].parentNode.removeChild(document.images[i]);
 
-    }
+}
+
+function postMoneyChange(amount, operationCode){
+    var data = {
+        money: amount,
+        code: operationCode
+        };
+        
+        var request = new XMLHttpRequest();
+        request.open('POST', '/change_money_count', true);
+        request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        request.send(JSON.stringify(data));
+}
+
+
+function updateMoneyCount() {
+    const url = 'http://127.0.0.1:5000/get_money_count';
+    fetch(url)
+    .then(response => response.json())  
+    .then(json => {
+        console.log(json);
+        document.getElementById("MoneyCount").innerText = 'Количество очков: ' + JSON.stringify(json['money'])
+    })
+
+}

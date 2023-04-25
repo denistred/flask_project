@@ -4,22 +4,24 @@ body {
   margin-left: 0px;
 }
 
-#profileContainer {
+.profileContainer {
   margin-top: 10px;
   margin-left: 10px;
 }
 
-#rulesContainer {
+.rulesContainer {
   margin-top: 10px;
   margin-left: 10px;
 }
 
-#playerCardsContainer {
-  margin: 10px 10px 10px;
+.playerCardsContainer {
+  display: flex;
+  justify-content: center;
 }
 
-#dealerCardsContainer {
-  margin: 10px 10px 10px;
+.dealerCardsContainer {
+  display: flex;
+  justify-content: center;
 }
 
 .topnav {
@@ -56,4 +58,10 @@ body {
   padding: 14px 16px;
   font-size: 17px;
   text-align: right;
+}
+.profileContainer p{
+  font-size: 17px;
+}
+.rulesContainer p{
+  font-size: 24px;
 }
