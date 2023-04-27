@@ -1,3 +1,5 @@
+import datetime
+
 import flask
 from forms import RegisterForm, LoginForm
 from flask import Flask, render_template, redirect, url_for, request, jsonify
@@ -84,12 +86,34 @@ def db_change():
     money_count = json_responce['money']
     add_money = json_responce['code']
     curr_user = db_sess.query(User).filter(User.id == current_user.id).first()
-    if add_money == 0:
+    if add_money == 0 or add_money == '0':
         curr_user.money -= int(money_count)
     else:
         curr_user.money += int(money_count)
     db_sess.commit()
     return "Success", 200
+
+
+@app.route('/check_bonus_ready', methods=['GET'])
+def check_bonus_ready():
+    db_sess = db_session.create_session()
+    user = db_sess.query(User).filter(User.id == current_user.id).first()
+    json_responce = {}
+    bonus_amount = 500
+    if user.bonus_picked is False:
+        user.money += bonus_amount
+        user.bonus_picked = True
+        json_responce['message'] = 'Вы получили 500 очков'
+    elif user.bonus_picked and (datetime.datetime.now() - user.last_bonus_pickup_time > datetime.timedelta(0, 10800)):
+        user.last_bonus_pickup_time = datetime.datetime.now()
+        user.money += bonus_amount
+        user.bonus_picked = True
+        json_responce['message'] = 'Вы получили 500 очков'
+    else:
+        json_responce['message'] = 'Бонус ещё не готов, Вы можете забирать бонус раз в 3 часа'
+    json_responce['status'] = 200
+    db_sess.commit()
+    return jsonify(json_responce)
 
 @app.route('/get_money_count', methods=['GET'])
 def get_money_count():

@@ -70,11 +70,9 @@ function countPlayerPoints(){
 
 
 function startGame(){
-    postMoneyChange(50, 1);
-    
+    //postMoneyChange(50, 1);
+    document.getElementById('startButtonsContainer').style.display = 'none';
     clearGame();
-    btn = document.getElementById("startbutton");
-    btn.style.display = 'none';
     for (let i= 0; i < 2; i++){
         get_card();
     }
@@ -82,11 +80,15 @@ function startGame(){
     let get_card_btn = document.createElement("button");
     get_card_btn.setAttribute('id', 'getCardBtn');
     get_card_btn.setAttribute('onclick', 'get_card()');
+    get_card_btn.setAttribute('class', 'btn btn-primary btn-lg')
     get_card_btn.innerText = "Взять карту";
+
     let pass_card_btn = document.createElement("button");
     pass_card_btn.setAttribute('id', 'passCardBtn');
     pass_card_btn.setAttribute('onclick', 'passGame()');
+    pass_card_btn.setAttribute('class', 'btn btn-primary btn-lg');
     pass_card_btn.innerText = "Пасс";
+
     const buttonContainer = document.getElementById("buttonContainer");
     buttonContainer.appendChild(get_card_btn);
     buttonContainer.appendChild(pass_card_btn);
@@ -110,9 +112,9 @@ function get_card(){
 
 function gameLogic(){
     let playerPoints = countPlayerPoints();
-    console.log("player points:" + playerPoints);
+    //console.log("player points:" + playerPoints);
     let dealerPoints = countDealerPoints();
-    console.log("dealer points:" + dealerPoints);
+    //console.log("dealer points:" + dealerPoints);
     if (playerPoints > 21){
         endGame(2);
     }
@@ -161,7 +163,7 @@ function passGame(){
 
 function endGame(code){ // 1 - win; 2 - lose; 3 - draw
     removeButtons();
-    updateMoneyCount();
+    //updateMoneyCount();
     let dealerPoints = countDealerPoints();
     let dealerPointsContainer = document.getElementById('dealerPoints');
     dealerPointsContainer.innerText = 'Количество очков дилера: ' + dealerPoints;
@@ -170,24 +172,29 @@ function endGame(code){ // 1 - win; 2 - lose; 3 - draw
     let playerPointsContainer = document.getElementById('playerPoints');
     playerPointsContainer.innerText = 'Количество ваших очков: ' + playerPoints;
 
+    let bet = document.getElementById("betAmount").value;
     if (code == 1) {
         document.getElementById("win-notification").style.display = "block";
         document.getElementById("gameResult").innerText = 'Вы победили!';
+        document.getElementById("incomeAmount").innerText = 'Ваш выигрыш: ' + bet; 
+        postMoneyChange(bet, 1)
     }
     else if (code == 2){
         document.getElementById("win-notification").style.display = "block";
         document.getElementById('gameResult').innerText = 'Вы проиграли :(';
+        document.getElementById("incomeAmount").innerText = 'Вы проиграли: ' + bet;
+        postMoneyChange(bet, 0)
     }
     else if (code == 3){
         document.getElementById("win-notification").style.display = "block";
         document.getElementById('gameResult').innerText = 'Ничья';
+        document.getElementById('incomeAmount').innerText = 'Вы ничего не выграли';
     }
     
 }
 
 function removeButtons(){
-    let btn = document.getElementById("playbutton");
-    btn.style.display = '';
+    document.getElementById("startButtonsContainer").style.display = '';
     let getCardBtn = document.getElementById('getCardBtn');
     getCardBtn.remove();
     let passCardBtn = document.getElementById('passCardBtn');
@@ -215,7 +222,15 @@ function postMoneyChange(amount, operationCode){
         request.open('POST', '/change_money_count', true);
         request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         request.send(JSON.stringify(data));
+    if (operationCode == 0) {
+        document.getElementById("MoneyCount").innerText = Number(document.getElementById("MoneyCount").innerText) - Number(amount);
+    }
+    else {
+        document.getElementById("MoneyCount").innerText = Number(document.getElementById("MoneyCount").innerText) + Number(amount);
+    }
+
 }
+
 
 
 function updateMoneyCount() {
@@ -223,8 +238,8 @@ function updateMoneyCount() {
     fetch(url)
     .then(response => response.json())  
     .then(json => {
-        console.log(json);
-        document.getElementById("MoneyCount").innerText = 'Количество очков: ' + JSON.stringify(json['money'])
+        //console.log(json);
+        //document.getElementById("MoneyCount").innerText = 'Количество очков: ' + JSON.stringify(json['money'])
     })
 
 }

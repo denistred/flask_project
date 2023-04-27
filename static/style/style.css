@@ -2,6 +2,87 @@ body {
   margin-top: 0px;
   margin-right: 0px;
   margin-left: 0px;
+  background-color:seagreen;
+}
+
+
+button {
+  background-color: crimson;
+  border:black 2px solid;
+  border-radius: 10px;
+  color: white;
+  margin: 5px 5px 5px;
+}
+
+.btn-primary {
+  background-color: #fd0d0d;
+  border-color: rgb(253, 69, 13);
+}
+.btn-primary:hover {
+  background-color: #fd0d0d;
+  border-color: rgb(253, 69, 13);
+}
+.btn-check:focus + .btn-primary, .btn-primary:focus {
+  background-color: #fd0d0d;
+  border-color: rgb(253, 69, 13);
+  box-shadow: 0 0 0 0.25rem rgba(253, 97, 49, 0.5);
+}
+.btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+  background-color: #fd0d0d;
+  border-color: rgb(253, 69, 13);
+}
+.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(253, 49, 49, 0.5);
+}
+.btn-primary:disabled, .btn-primary.disabled {
+  background-color: #fd0d0d;
+  border-color: rgb(253, 13, 13);
+}
+.form-range {
+  width: 20%;
+}
+.form-range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
+}
+.form-range:focus::-moz-range-thumb {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
+}
+.form-range::-webkit-slider-thumb {
+  background-color: #fd0d0d;
+}
+.form-range::-webkit-slider-thumb:active {
+  background-color: #feb6b6;
+}
+.form-range::-moz-range-thumb {
+  background-color: #fd150d;
+}
+.form-range::-moz-range-thumb:active {
+  background-color: #feb6b6;
+}
+.form-range::-moz-range-track {
+  background-color: #e6dede;
+}
+.form-range:disabled::-webkit-slider-thumb {
+  background-color: #bdadad;
+}
+.form-range:disabled::-moz-range-thumb {
+  background-color: #bdadad;
+}
+
+#startButtonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#moneyContainer {
+  display: flex;
+  justify-content: right;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
 }
 
 .profileContainer {
@@ -11,7 +92,8 @@ body {
 
 .rulesContainer {
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .playerCardsContainer {
@@ -47,7 +129,7 @@ body {
 
 
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #ff0000;
   color: white;
 }
 
@@ -64,4 +146,18 @@ body {
 }
 .rulesContainer p{
   font-size: 24px;
+}
+
+p{
+  color:white;
+}
+h1{
+  color:white;
+}
+h3{
+  color: white;
+}
+output{
+  color:white;
+  font-size: 20px;
 }

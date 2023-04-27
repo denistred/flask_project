@@ -9,13 +9,19 @@
     <div class="playerCardsContainer" id="playerCardsContainer"></div>
     <div class="buttonContainer" id="buttonContainer"></div>
 </div>
-<div id="win-notification" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); width:300px; height:150px; background-color:#fff; border:1px solid #444; text-align:center; padding:20px;">
+<div id="win-notification" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); width:300px; height:200px; background-color:black; border:1px solid #444; text-align:center; padding:20px;">
     <h3 id="gameResult"></h3>
     <p id="dealerPoints"></p>
     <p id="playerPoints"></p>
-    <button id="playbutton" onclick="startGame()">Начать заново</button>
+    <p id="incomeAmount"></p>
 </div>
 
 </div>
-<button id="startbutton" onclick="startGame()">Начать игру</button>
+<div id="startButtonsContainer">
+    <button  class="btn btn-primary btn-lg" id="startbutton" onclick="startGame()">Начать игру</button>
+    <!--<input type="range" value="50" min="1" max="100" oninput="this.nextElementSibling.value = this.value" id="betaAmount">
+    <output>50</output>-->
+    <input type="range" value="50" min="10" max="99" oninput="this.nextElementSibling.value = this.value" class="form-range" id="betAmount">
+    <output>50</output>
+</div>
 {% endblock %}

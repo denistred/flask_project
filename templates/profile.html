@@ -6,8 +6,20 @@
    <p>Электронная почта: {{ current_user.email }}</p>
    <p>Количество очков: {{ current_user.money }}</p>
    <p>Дата регистрации: {{ current_user.created_date }}</p>
+   <script>function check_bonus(){
+    const url = 'http://127.0.0.1:5000/check_bonus_ready';
+    console.log('sending');
+    fetch(url)
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+        document.getElementById("bonusMessage").innerText = JSON.stringify(json['message'])
+    })
+}</script>
+   <button class="btn btn-primary btn-lg" onclick="check_bonus()">Получить бонус</button>
+   <p id="bonusMessage"></p>
    <form action="/logout" target="_blank">
-      <button>Выйти из аккаунта</button>
+      <button class="btn btn-primary btn-lg">Выйти из аккаунта</button>
    </form>
 </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="static/style/style.css">
     {% block title -%}
         {% if title %}
@@ -17,7 +18,10 @@
         <a class="active" href="profile">Профиль</a>
         <a href="game">Игра</a>
         <a href="rules">Правила</a>
-        <p id="MoneyCount">Количество очков: {{current_user.money}}</p>
+        <div id="moneyContainer">
+            <p>Количесвто очков:</p>
+            <p id="MoneyCount">{{current_user.money}}</p>
+        </div>
     </div>
     {% block content %}{% endblock %}
 
