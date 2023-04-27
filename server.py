@@ -16,6 +16,11 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'success'
 
 
+def main():
+    db_session.global_init('db/logs.db')
+    app.run()
+
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
@@ -104,7 +109,8 @@ def check_bonus_ready():
         user.money += bonus_amount
         user.bonus_picked = True
         json_responce['message'] = 'Вы получили 500 очков'
-    elif user.bonus_picked and (datetime.datetime.now() - user.last_bonus_pickup_time > datetime.timedelta(0, 10800)):
+    elif user.bonus_picked and (
+            datetime.datetime.now() - user.last_bonus_pickup_time > datetime.timedelta(0, 10800)):
         user.last_bonus_pickup_time = datetime.datetime.now()
         user.money += bonus_amount
         user.bonus_picked = True
@@ -115,6 +121,7 @@ def check_bonus_ready():
     db_sess.commit()
     return jsonify(json_responce)
 
+
 @app.route('/get_money_count', methods=['GET'])
 def get_money_count():
     db_sess = db_session.create_session()
@@ -123,5 +130,4 @@ def get_money_count():
 
 
 if __name__ == '__main__':
-    db_session.global_init("users.db")
-    app.run()
+    main()
