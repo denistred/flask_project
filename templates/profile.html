@@ -2,6 +2,14 @@
 
 {% block content %}
 <div class="profileContainer">
+   <div class="profile-avatar">
+      <img src="{{ url_for('get_user_avatar') }}" style="width: 20%; height: 20%">
+   </div>
+     <form action='{{url_for("upload_user_avatar")}}' method="POST" enctype="multipart/form-data">
+         <p><input type="file" name="file">
+         <p>(JPG, PNG, png до 3Мб)
+         <p><input class="btn btn-outline-primary" type="submit" value="Загрузить">
+     </form>
    <p>Имя: {{ current_user.name }}</p>
    <p>Электронная почта: {{ current_user.email }}</p>
    <p id="profileMoneyAmount">Количество очков: {{ current_user.money }}</p>

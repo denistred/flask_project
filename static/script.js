@@ -70,7 +70,6 @@ function countPlayerPoints(){
 
 
 function startGame(){
-    //postMoneyChange(50, 1);
     document.getElementById('startButtonsContainer').style.display = 'none';
     clearGame();
     for (let i= 0; i < 2; i++){
@@ -112,9 +111,7 @@ function get_card(){
 
 function gameLogic(){
     let playerPoints = countPlayerPoints();
-    //console.log("player points:" + playerPoints);
     let dealerPoints = countDealerPoints();
-    //console.log("dealer points:" + dealerPoints);
     if (playerPoints > 21){
         endGame(2);
     }
@@ -163,7 +160,6 @@ function passGame(){
 
 function endGame(code){ // 1 - win; 2 - lose; 3 - draw
     removeButtons();
-    //updateMoneyCount();
     let dealerPoints = countDealerPoints();
     let dealerPointsContainer = document.getElementById('dealerPoints');
     dealerPointsContainer.innerText = 'Количество очков дилера: ' + dealerPoints;
@@ -238,27 +234,12 @@ function updateMoneyCount() {
     fetch(url)
     .then(response => response.json())  
     .then(json => {
-        //console.log(json);
+        console.log(json);
         //document.getElementById("MoneyCount").innerText = 'Количество очков: ' + JSON.stringify(json['money'])
     })
 
 }
 
-function check_bonus(){
-    const url = 'http://127.0.0.1:5000/check_bonus_ready';
-    console.log('sending');
-    fetch(url)
-    .then(response => response.json())
-    .then(json => {
-        console.log(json);
-        document.getElementById("bonusMessage").innerText = JSON.stringify(json['message']);
-        if (json['getting']){
-            let money = document.getElementById("profileMoneyAmount");
-            let new_money_count = Number(money.innerText.split(' ')[money.innerText.split(' ').length - 1]) + 500;
-            money.innerText = 'Количество очков: ' + new_money_count;
-            document.getElementById("MoneyCount").innerText = Number(document.getElementById("MoneyCount").innerText) + 500;
-        }
-    })
-}
+
 
 

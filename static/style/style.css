@@ -77,6 +77,31 @@ button {
   background-color: #bdadad;
 }
 
+.btn-outline-primary {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+.btn-outline-primary:hover {
+  color: black;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+.btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
+  box-shadow: 0 0 0 0.25rem rgba(228, 239, 255, 0.5);
+}
+.btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
+  color: #ffffff;
+  background-color: #ffffff;
+  border-color: #eaf3ff;
+}
+.btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
+  box-shadow: 0 0 0 0.25rem rgba(230, 240, 255, 0.5);
+}
+.btn-outline-primary:disabled, .btn-outline-primary.disabled {
+  color: #e6f0ff;
+}
+
+
 #startButtonsContainer {
   display: flex;
   justify-content: center;

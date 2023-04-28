@@ -1,8 +1,7 @@
 import datetime
-
-import flask
+import sqlite3
 from forms import RegisterForm, LoginForm
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, make_response, flash
 from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from data import db_session
 from data.users import User
@@ -136,6 +135,41 @@ def get_money_count():
     db_sess = db_session.create_session()
     json_responce = {'money': db_sess.query(User).filter(User.id == current_user.id).first().money}
     return jsonify(json_responce)
+
+
+@app.route('/upload_user_avatar', methods=['POST'])
+@login_required
+def upload_user_avatar():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and (file.filename.rsplit('.', 1)[1] in ['png', 'PNG', 'jpg']):
+            try:
+                img = file.read()
+                db_sess = db_session.create_session()
+                user = db_sess.query(User).filter(User.id == current_user.id).first()
+                user.avatar = sqlite3.Binary(img)
+                db_sess.add(user)
+                db_sess.commit()
+            except FileNotFoundError as e:
+                flash('Ошибка чтения файла', 'error')
+        else:
+            flash('Ошибка установки аватара', 'error')
+    return redirect(url_for('profile'))
+
+
+@app.route('/get_user_avatar', methods=['GET'])
+@login_required
+def get_user_avatar():
+    if not current_user.avatar:
+        with app.open_resource(
+                app.root_path + url_for('static', filename='images/missing_avatar.png'), 'rb') as f:
+            img = f.read()
+    else:
+        img = current_user.avatar
+
+    response = make_response(img)
+    response.headers['Content-Type'] = 'image/png'
+    return response
 
 
 if __name__ == '__main__':

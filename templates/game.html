@@ -19,9 +19,7 @@
 </div>
 <div id="startButtonsContainer">
     <button  class="btn btn-primary btn-lg" id="startbutton" onclick="startGame()">Начать игру</button>
-    <!--<input type="range" value="50" min="1" max="100" oninput="this.nextElementSibling.value = this.value" id="betaAmount">
-    <output>50</output>-->
-    <input type="range" value="50" min="10" max="99" oninput="this.nextElementSibling.value = this.value" class="form-range" id="betAmount">
+    <input type="range" value="50" min="10" max="100" step="10" oninput="this.nextElementSibling.value = this.value" class="form-range" id="betAmount">
     <output>50</output>
 </div>
 {% endblock %}
