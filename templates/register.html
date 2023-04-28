@@ -10,7 +10,7 @@
 
 	{{ super() }}
 	{% for cat, msg in get_flashed_messages(True) %}
-		<div class="flash {{cat}}">
+		<div class="flash {{cat}}" id="flash">
 			{{msg}}
 		</div>
 	{% endfor %}

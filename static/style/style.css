@@ -14,6 +14,14 @@ button {
   margin: 5px 5px 5px;
 }
 
+#main {
+  height: 300px;
+}
+
+#flash{
+  color: white;
+}
+
 .btn-primary {
   background-color: #fd0d0d;
   border-color: rgb(253, 69, 13);
@@ -148,11 +156,18 @@ button {
   font-size: 24px;
 }
 
+a{
+  color:white;
+}
+
 p{
   color:white;
 }
 h1{
   color:white;
+}
+h2 {
+  color: white;
 }
 h3{
   color: white;
