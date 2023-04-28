@@ -243,3 +243,22 @@ function updateMoneyCount() {
     })
 
 }
+
+function check_bonus(){
+    const url = 'http://127.0.0.1:5000/check_bonus_ready';
+    console.log('sending');
+    fetch(url)
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+        document.getElementById("bonusMessage").innerText = JSON.stringify(json['message']);
+        if (json['getting']){
+            let money = document.getElementById("profileMoneyAmount");
+            let new_money_count = Number(money.innerText.split(' ')[money.innerText.split(' ').length - 1]) + 500;
+            money.innerText = 'Количество очков: ' + new_money_count;
+            document.getElementById("MoneyCount").innerText = Number(document.getElementById("MoneyCount").innerText) + 500;
+        }
+    })
+}
+
+

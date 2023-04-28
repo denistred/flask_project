@@ -29,7 +29,10 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    return render_template('index.html', title='test')
+    if current_user.is_authenticated:
+        return render_template('index.html', title='Black Jack', user=current_user)
+    else:
+        return render_template('index.html', title='Black Jack')
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -65,17 +68,20 @@ def login():
 @login_required
 def profile():
     db_sess = db_session.create_session()
-    return render_template('profile.html', title='Профиль')
+    return render_template('profile.html', title='Профиль', user=current_user)
 
 
 @app.route('/game')
 def game():
-    return render_template('game.html', title='Блек-Джек')
+    return render_template('game.html', title='Блек-Джек', user=current_user)
 
 
 @app.route('/rules')
 def rules():
-    return render_template('rules.html', title='Правила')
+    if current_user.is_authenticated:
+        return render_template('rules.html', title='Правила', user=current_user)
+    else:
+        return render_template('rules.html', title='Правила')
 
 
 @app.route('/logout')
@@ -109,14 +115,17 @@ def check_bonus_ready():
         user.money += bonus_amount
         user.bonus_picked = True
         json_responce['message'] = 'Вы получили 500 очков'
+        json_responce['getting'] = True
     elif user.bonus_picked and (
             datetime.datetime.now() - user.last_bonus_pickup_time > datetime.timedelta(0, 10800)):
         user.last_bonus_pickup_time = datetime.datetime.now()
         user.money += bonus_amount
         user.bonus_picked = True
         json_responce['message'] = 'Вы получили 500 очков'
+        json_responce['getting'] = True
     else:
         json_responce['message'] = 'Бонус ещё не готов, Вы можете забирать бонус раз в 3 часа'
+        json_responce['getting'] = False
     json_responce['status'] = 200
     db_sess.commit()
     return jsonify(json_responce)

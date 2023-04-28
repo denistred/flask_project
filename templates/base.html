@@ -18,10 +18,17 @@
         <a class="active" href="profile">Профиль</a>
         <a href="game">Игра</a>
         <a href="rules">Правила</a>
-        <div id="moneyContainer">
-            <p>Количесвто очков:</p>
-            <p id="MoneyCount">{{current_user.money}}</p>
-        </div>
+        {% if user %}
+            <div id="moneyContainer">
+                <p>Количесвто очков:</p>
+                <p id="MoneyCount">{{current_user.money}}</p>
+            </div>
+        {% else %}
+            <div id="moneyContainer">
+                <a href="register">Регистрация</a>
+                <a href="login">Логин</a>
+            </div>
+        {% endif %}
     </div>
     {% block content %}{% endblock %}
 
