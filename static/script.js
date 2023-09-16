@@ -213,7 +213,7 @@ function endGame(code) {
   let playerPointsContainer = document.getElementById("playerPoints");
   playerPointsContainer.innerText = "Количество ваших очков: " + playerPoints;
 
-  let bet = document.getElementById("betAmount").value;
+  let bet = document.querySelector('input[name="btnradio"]:checked').value;
   if (code == 1) {
     document.getElementById("win-notification").style.display = "block";
     document.getElementById("gameResult").innerText = "Вы победили!";

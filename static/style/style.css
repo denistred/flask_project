@@ -105,7 +105,7 @@ button {
 .btn-outline-primary.active,
 .btn-outline-primary.dropdown-toggle.show {
   color: #ffffff;
-  background-color: #ffffff;
+  background-color: #fd0d0d;
   border-color: #eaf3ff;
 }
 .btn-check:checked + .btn-outline-primary:focus,

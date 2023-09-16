@@ -20,7 +20,15 @@
 </div>
 <div id="startButtonsContainer">
     <button  class="btn btn-primary btn-lg" id="startbutton" onclick="startGame()">Начать игру</button>
-    <input type="range" value="50" min="10" max="100" step="10" oninput="this.nextElementSibling.value = this.value" class="form-range" id="betAmount">
-    <output>50</output>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="10" >
+        <label class="btn btn-outline-primary" for="btnradio1">10</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="50" >
+        <label class="btn btn-outline-primary" for="btnradio2">50</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="100">
+        <label class="btn btn-outline-primary" for="btnradio3">100</label>
+      </div>
 </div>
 {% endblock %}
