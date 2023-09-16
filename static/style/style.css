@@ -2,13 +2,12 @@ body {
   margin-top: 0px;
   margin-right: 0px;
   margin-left: 0px;
-  background-color:seagreen;
+  background-color: seagreen;
 }
-
 
 button {
   background-color: crimson;
-  border:black 2px solid;
+  border: black 2px solid;
   border-radius: 10px;
   color: white;
   margin: 5px 5px 5px;
@@ -18,7 +17,7 @@ button {
   height: 300px;
 }
 
-#flash{
+#flash {
   color: white;
 }
 
@@ -30,19 +29,29 @@ button {
   background-color: #fd0d0d;
   border-color: rgb(253, 69, 13);
 }
-.btn-check:focus + .btn-primary, .btn-primary:focus {
+.btn-check:focus + .btn-primary,
+.btn-primary:focus {
   background-color: #fd0d0d;
   border-color: rgb(253, 69, 13);
   box-shadow: 0 0 0 0.25rem rgba(253, 97, 49, 0.5);
 }
-.btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+.btn-check:checked + .btn-primary,
+.btn-check:active + .btn-primary,
+.btn-primary:active,
+.btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
   background-color: #fd0d0d;
   border-color: rgb(253, 69, 13);
 }
-.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+.btn-check:checked + .btn-primary:focus,
+.btn-check:active + .btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(253, 49, 49, 0.5);
 }
-.btn-primary:disabled, .btn-primary.disabled {
+.btn-primary:disabled,
+.btn-primary.disabled {
   background-color: #fd0d0d;
   border-color: rgb(253, 13, 13);
 }
@@ -86,21 +95,30 @@ button {
   background-color: #ffffff;
   border-color: #ffffff;
 }
-.btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
+.btn-check:focus + .btn-outline-primary,
+.btn-outline-primary:focus {
   box-shadow: 0 0 0 0.25rem rgba(228, 239, 255, 0.5);
 }
-.btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
+.btn-check:checked + .btn-outline-primary,
+.btn-check:active + .btn-outline-primary,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.dropdown-toggle.show {
   color: #ffffff;
   background-color: #ffffff;
   border-color: #eaf3ff;
 }
-.btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
+.btn-check:checked + .btn-outline-primary:focus,
+.btn-check:active + .btn-outline-primary:focus,
+.btn-outline-primary:active:focus,
+.btn-outline-primary.active:focus,
+.btn-outline-primary.dropdown-toggle.show:focus {
   box-shadow: 0 0 0 0.25rem rgba(230, 240, 255, 0.5);
 }
-.btn-outline-primary:disabled, .btn-outline-primary.disabled {
+.btn-outline-primary:disabled,
+.btn-outline-primary.disabled {
   color: #e6f0ff;
 }
-
 
 #startButtonsContainer {
   display: flex;
@@ -111,6 +129,18 @@ button {
 #moneyContainer {
   display: flex;
   justify-content: right;
+  overflow: auto;
+}
+
+#generalContainer {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 100px;
+  position: absolute;
 }
 
 .buttonContainer {
@@ -144,7 +174,6 @@ button {
   overflow: hidden;
 }
 
-
 .topnav a {
   float: left;
   color: #f2f2f2;
@@ -154,12 +183,10 @@ button {
   font-size: 17px;
 }
 
-
 .topnav a:hover {
   background-color: #ddd;
   color: black;
 }
-
 
 .topnav a.active {
   background-color: #ff0000;
@@ -174,30 +201,41 @@ button {
   font-size: 17px;
   text-align: right;
 }
-.profileContainer p{
+.profileContainer p {
   font-size: 17px;
 }
-.rulesContainer p{
+.rulesContainer p {
   font-size: 24px;
 }
 
-a{
-  color:white;
+a {
+  color: white;
 }
 
-p{
-  color:white;
+p {
+  color: white;
 }
-h1{
-  color:white;
+h1 {
+  color: white;
 }
 h2 {
   color: white;
 }
-h3{
+h3 {
   color: white;
 }
-output{
-  color:white;
+output {
+  color: white;
   font-size: 20px;
+}
+
+#mainGameContainer {
+  margin: auto;
+  padding: 5px 10px 5px;
+  height: 636px;
+  border-radius: 15px;
+  border: #ffffff solid 5px;
+  width: min-content;
+  min-width: 430px;
+  background-color: rgb(28, 88, 54);
 }

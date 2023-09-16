@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="static/style/style.css">
-    {% block title -%}
-        {% if title %}
-            <title>{{title}}</title>
-        {% else %}
-            <title>Блек-Джек</title>
-        {% endif %}
-    {% endblock %}
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='bootstrap/css/bootstrap.css') }}"
+    />
+    <link rel="stylesheet" href="static/style/style.css" />
+    {% block title -%} {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Блек-Джек</title>
+    {% endif %} {% endblock %}
     <title>Title</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="topnav">
-        <a class="active" href="profile">Профиль</a>
-        <a href="game">Игра</a>
-        <a href="rules">Правила</a>
-        {% if user %}
-            <div id="moneyContainer">
-                <p>Количесвто очков:</p>
-                <p id="MoneyCount">{{current_user.money}}</p>
-            </div>
-        {% else %}
-            <div id="moneyContainer">
-                <a href="register">Регистрация</a>
-                <a href="login">Логин</a>
-            </div>
-        {% endif %}
+      <a class="active" href="profile">Профиль</a>
+      <a href="game">Игра</a>
+      <div id="generalContainer">
+        <a id="general" href="rules">Главная</a>
+      </div>
+
+      {% if user %}
+      <div id="moneyContainer">
+        <p>Количесвто очков:</p>
+        <p id="MoneyCount">{{current_user.money}}</p>
+      </div>
+      {% else %}
+      <div id="moneyContainer">
+        <a href="register">Регистрация</a>
+        <a href="login">Логин</a>
+      </div>
+      {% endif %}
     </div>
     {% block content %}{% endblock %}
-
-</body>
+  </body>
 </html>
